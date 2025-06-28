@@ -1,1 +1,15 @@
+# .gitignore for AI Text Summarizer Backend
+
+# Python bytecode files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+.env/
+virtualenv/
 .env
