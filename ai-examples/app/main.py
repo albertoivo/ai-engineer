@@ -16,7 +16,7 @@ app.add_middleware(
 class SummaryRequest(BaseModel):
     text: str
 
-@app.post("/api/summarize")
-def summarize(req: SummaryRequest):
+@app.post("/api/text-summarize")
+def text_summarize(req: SummaryRequest):
     summary = summarize_text(req.text)
     return {"summary": summary}
