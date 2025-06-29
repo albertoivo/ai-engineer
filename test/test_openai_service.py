@@ -142,24 +142,6 @@ class TestOpenAIService(unittest.TestCase):
             result = answer_question("What is this?", "")
             self.assertIsNotNone(result)
 
-    def test_none_text_validation_suggestion(self):
-        """Teste que demonstra como implementar validação para None"""
-        # Este teste mostra como a função DEVERIA se comportar
-        # se implementássemos validação de entrada
-
-        # Atualmente a função aceita None e converte para "None"
-        # Mas seria melhor validar e rejeitar None explicitamente
-
-        # Para implementar essa validação, adicione no início da função:
-        # if text is None:
-        #     raise ValueError("Text cannot be None")
-
-        # Por enquanto, este teste documenta o comportamento esperado
-        # mas não falha, pois serve como documentação
-        self.assertTrue(
-            True
-        )  # Placeholder - implementar validação no openai_service.py
-
     # =====================================
     # TESTES DE TRATAMENTO DE ERROS
     # =====================================
