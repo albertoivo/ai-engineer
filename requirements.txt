@@ -38,3 +38,4 @@ black
 isort
 flake8
 autoflake
+youtube_transcript_api

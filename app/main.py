@@ -28,6 +28,7 @@ from .openai_service import (
     generate_text,
     generate_tweet,
     summarize_text,
+    summarize_youtube_video,
     translate_text,
 )
 
@@ -73,6 +74,12 @@ class ImageRequest(BaseModel):
     image_url: str
     model: Optional[str] = "gpt-3.5-turbo"
     max_tokens: Optional[int] = 150
+
+
+class YouTubeRequest(BaseModel):
+    video_url: str
+    model: Optional[str] = "gpt-3.5-turbo"
+    max_tokens: Optional[int] = 500
 
 
 # Middleware para logar requisições
@@ -350,6 +357,25 @@ async def api_generate_script(req: PromptRequest):
         raise HTTPException(status_code=500, detail=str(e))
 
 
+@app.post("/api/youtube-summary")
+async def api_youtube_summary(req: YouTubeRequest):
+    """
+    Gera resumo estruturado de vídeo do YouTube
+    """
+    try:
+        logger.info(f"Summarizing YouTube video: {req.video_url}")
+        response = summarize_youtube_video(
+            video_url=req.video_url, model=req.model, max_tokens=req.max_tokens
+        )
+        return {"success": True, "video_url": req.video_url, "summary": response}
+    except ValueError as e:
+        logger.error(f"Validation error in YouTube summary: {str(e)}")
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        logger.error(f"Error in YouTube summary: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 # Rota de informações sobre a API
 @app.get("/")
 async def root():
@@ -381,6 +407,7 @@ async def root():
             "generate_tweet": "/api/generate-tweet",
             "generate_news_article": "/api/generate-news-article",
             "generate_script": "/api/generate-script",
+            "youtube_summary": "/api/youtube-summary",
         },
         "documentation": "/docs",
     }
