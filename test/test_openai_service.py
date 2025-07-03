@@ -1,20 +1,13 @@
+import os
+import sys
 import unittest
 from unittest.mock import MagicMock, patch
-import sys
-import os
-
 
 # Import das funções que vamos testar
-from app.openai_service import (
-    analyze_sentiment,
-    answer_question,
-    extract_keywords,
-    generate_poem,
-    generate_story,
-    generate_text,
-    summarize_text,
-    translate_text,
-)
+from app.openai_service import (analyze_sentiment, answer_question,
+                                extract_keywords, generate_poem,
+                                generate_story, generate_text, summarize_text,
+                                translate_text)
 
 
 class TestOpenAIService(unittest.TestCase):
